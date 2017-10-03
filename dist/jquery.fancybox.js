@@ -1003,6 +1003,73 @@
           }
         },
 
+        // Remove current slide
+        // ==========================
+
+        removeCurrent : function() {
+          var self = this;
+
+          var groupLen = self.group.length;
+
+          var current = self.current;
+
+          var loop = current ? current.opts.loop : self.opts.loop;
+
+          var isLastItem = current.index === groupLen - 1;
+
+          var hasNext = loop || !isLastItem;
+
+          var toRemove = current;
+
+
+          //Change slide
+          if ( groupLen === 1 ) {
+
+            self.close();
+
+          }
+
+          if ( hasNext ) {
+
+            self.next();
+
+
+          } else {
+
+            self.previous();
+
+          }
+
+          //Remove from group
+          self.group.splice( toRemove.index, 1 );
+
+          //Update indexes and positions
+          for ( var i = toRemove.index; i < self.group.length; i++ ) {
+            self.group[i].index--;
+            self.group[i].pos--;
+          }
+
+          if ( hasNext ) {
+
+            // Update current
+            self.current.index--;
+            self.current.pos--;
+
+            self.currIndex--;
+            self.currPos--;
+
+          }
+          current = self.current;
+
+          //prev
+          self.prevIndex = self.current.index;
+          self.prevPos = self.current.pos;
+
+          self.updateControls();
+
+          self.createSideSlides();
+        },
+
 
         // Switch to selected gallery item
         // ===============================
