@@ -972,6 +972,34 @@
         },
 
 
+        // Create prev and next slides
+        // ==========================
+
+        createSideSlides : function( pos ) {
+          var self = this;
+
+          var current = self.current;
+
+          var loop = self.current ? self.current.opts.loop : self.opts.loop;
+
+          var groupLen = self.group.length;
+
+          if ( !loop && ( pos < 0 || pos >= groupLen ) ) {
+              return false;
+          }
+
+          if ( groupLen > 1 ) {
+              if ( loop || current.index > 0 ) {
+                  self.createSlide( pos - 1 );
+              }
+
+              if ( loop || current.index < groupLen - 1 ) {
+                  self.createSlide( pos + 1 );
+              }
+          }
+        },
+
+
         // Switch to selected gallery item
         // ===============================
 
@@ -1012,19 +1040,11 @@
             // Create slides
             current = self.createSlide( pos );
 
-            if ( groupLen > 1 ) {
-                if ( loop || current.index > 0 ) {
-                    self.createSlide( pos - 1 );
-                }
-
-                if ( loop || current.index < groupLen - 1 ) {
-                    self.createSlide( pos + 1 );
-                }
-            }
-
             self.current   = current;
             self.currIndex = current.index;
             self.currPos   = current.pos;
+
+            self.createSideSlides( pos );
 
             self.trigger( 'beforeShow', firstRun );
 
