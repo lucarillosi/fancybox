@@ -774,13 +774,15 @@
 
         appendGroup : function ( content ) {
           var self  = this;
+          var currIndex = self.currIndex;
 
           self.createGroup( content );
 
           self.updateControls();
 
-          //TODO: Update slided for a correct animation
-
+          if ( currIndex === 0 || currIndex === self.group.length - 1 ) {
+            self.createSideSlides();
+          }
         },
 
 
