@@ -769,6 +769,20 @@
 
         },
 
+        // Append slides to existing group
+        // ===============================
+
+        appendGroup : function ( content ) {
+          var self  = this;
+
+          self.createGroup( content );
+
+          self.updateControls();
+
+          //TODO: Update slided for a correct animation
+
+        },
+
 
         // Attach an event handler functions for:
         //   - navigation buttons
