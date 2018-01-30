@@ -7,6 +7,23 @@ See the [project page](http://fancyapps.com/fancybox/3/) for documentation and a
 
 Follow [@thefancyapps](//twitter.com/thefancyapps) for updates.
 
+## What's new in this branch
+
+I added two functions to add and remove slides while FancyBox is open
+
+Usage is as simple as:
+
+```js
+  var carousel = $.fancybox.open(slides , options);
+
+  // Append multiple slides
+  carousel.appendGroup(newSlides);
+
+  // Remove currently displayed slide
+  carousel.removeCurrent();
+
+```
+
 
 ## Quick start
 
