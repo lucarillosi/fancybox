@@ -477,7 +477,7 @@
         init : function() {
             var self = this;
 
-            var testWidth, $container, buttonStr;
+            var testWidth, $container, buttonsHtml;
 
             var firstItemOpts = self.group[ self.currIndex ].opts;
 
@@ -507,15 +507,11 @@
             // ====================================
 
             // Build html code for buttons and insert into main template
-            buttonStr = '';
-
-            $.each( firstItemOpts.buttons, function( index, value ) {
-                buttonStr += ( firstItemOpts.btnTpl[ value ] || '' );
-            });
+            buttonsHtml = self.buildBtnsHtml( firstItemOpts )
 
             // Create markup from base template, it will be initially hidden to
             // avoid unnecessary work like painting while initializing is not complete
-            $container = $( self.translate( self, firstItemOpts.baseTpl.replace( '\{\{BUTTONS\}\}', buttonStr ) ) )
+            $container = $( self.translate( self, firstItemOpts.baseTpl.replace( '\{\{BUTTONS\}\}', buttonsHtml ) ) )
                 .addClass( 'fancybox-is-hidden' )
                 .attr('id', 'fancybox-container-' + self.id)
                 .addClass( firstItemOpts.baseClass )
@@ -553,6 +549,20 @@
             self.jumpTo( self.currIndex );
         },
 
+
+        // Build toolbar inner buttons
+        // ============================
+
+        buildBtnsHtml : function (currItemOpts) {
+            // Build html code for buttons and insert into main template
+            var buttonStr = '';
+
+            $.each( currItemOpts.buttons, function( index, value ) {
+                buttonStr += ( currItemOpts.btnTpl[ value ] || '' );
+            });
+
+            return buttonStr;
+        },
 
         // Simple i18n support - replaces object keys found in template
         // with corresponding values
@@ -2675,6 +2685,7 @@
             var opts     = current.opts;
             var caption  = opts.caption;
             var $caption = self.$refs.caption;
+            var btnsHtml = "";
 
             // Recalculate content dimensions
             current.$slide.trigger( 'refresh' );
@@ -2692,6 +2703,10 @@
             $('[data-fancybox-prev]').prop('disabled', ( !opts.loop && index <= 0 ) );
             $('[data-fancybox-next]').prop('disabled', ( !opts.loop && index >= self.group.length - 1 ) );
 
+            // Update toolbar innerHtml
+            btnsHtml = self.buildBtnsHtml( self.group[ self.currIndex ].opts );
+            btnsHtml = self.translate( self, btnsHtml );
+            self.$refs[ "toolbar" ].html( btnsHtml) ;
         },
 
         // Hide toolbar and caption
