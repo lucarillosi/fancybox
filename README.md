@@ -26,16 +26,16 @@ Usage is as simple as:
 ```
 ## 2. Customizable toolbar buttons
 Toolbar buttons are updated on each slide change, so you can customize each slide's toolbar individually by passing buttons as `opts`:
-```json
+```js
 {
 	src  : '' // Source of the content
 	type : '' // Content type: image|inline|ajax|iframe|html (optional)
 	opts : {
-    buttons: ["download"],
-    btnTpl: {
-      download: '<button data-download="true"></button>'
-    }
-  }
+		buttons: ["download"],
+		btnTpl: {
+			download: '<button data-download="true"></button>'
+		}
+	}
 }
 ```
 [Read more about available options](https://fancyapps.com/fancybox/3/docs/#options)
