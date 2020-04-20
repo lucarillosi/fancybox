@@ -7,8 +7,9 @@ See the [project page](http://fancyapps.com/fancybox/3/) for documentation and a
 
 Follow [@thefancyapps](//twitter.com/thefancyapps) for updates.
 
-## What's new in this branch
+# What's new in this fork
 
+## 1. Hot slide append and removal
 I added two functions to add and remove slides while FancyBox is open
 
 Usage is as simple as:
@@ -23,6 +24,21 @@ Usage is as simple as:
   carousel.removeCurrent();
 
 ```
+## 2. Customizable toolbar buttons
+Toolbar buttons are updated on each slide change, so you can customize each slide's toolbar individually by passing buttons as `opts`:
+```json
+{
+	src  : '' // Source of the content
+	type : '' // Content type: image|inline|ajax|iframe|html (optional)
+	opts : {
+    buttons: ["download"],
+    btnTpl: {
+      download: '<button data-download="true"></button>'
+    }
+  }
+}
+```
+[Read more about available options](https://fancyapps.com/fancybox/3/docs/#options)
 
 
 ## Quick start
